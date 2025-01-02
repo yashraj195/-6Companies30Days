@@ -1,0 +1,14 @@
+class Solution:
+    def incremovableSubarrayCount(self, nums: List[int]) -> int:
+        def strictly_inc(arr):
+            for i in range(len(arr)-1):
+                if arr[i+1] <= arr[i]:
+                    return False
+            return True
+        count= 0
+        for i in range(len(nums)):
+            for j in range(i,len(nums)):
+                temp = nums[:i] + nums[j+1:]
+                if temp == sorted(temp) and strictly_inc(temp):
+                    count += 1
+        return count
